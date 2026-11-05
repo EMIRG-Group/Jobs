@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canada's labour market — November 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EAEA; --panel:#FCFDFD;
+  --ink:#131F27; --ink2:#4C5C66; --ink3:#83919A;
+  --rule:#C7CFD2; --hair:#DCE1E3;
+  --grow:#146049; --growSoft:#A6CCBD;
+  --fall:#9A3724; --fallSoft:#DCAC9D;
+  --steel:#1D4C77; --steelSoft:#B9CDDD;
+  --ochre:#8A6A14;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:14.5px;line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+h1,h2,h3,h4{font-family:"Archivo",sans-serif;font-variation-settings:'wdth' 110;margin:0;line-height:1.05;letter-spacing:-.015em}
+:focus-visible{outline:2px solid var(--steel);outline-offset:3px}
+
+.shell{display:grid;grid-template-columns:184px 1fr;max-width:1160px;margin:0 auto}
+.rail{position:sticky;top:0;align-self:start;height:100vh;padding:40px 20px 30px 26px;border-right:1px solid var(--rule)}
+.mark{font-family:"Archivo";font-variation-settings:'wdth' 86;font-weight:700;font-size:12.5px;line-height:1.3;margin-bottom:28px}
+.mark span{display:block;color:var(--ink3);font-weight:400}
+.rail nav{display:flex;flex-direction:column}
+.rail a{padding:5px 0 5px 12px;text-decoration:none;color:var(--ink2);font-size:13px;border-left:2px solid transparent;transition:.15s}
+.rail a:hover{color:var(--ink)}
+.rail a.on{color:var(--ink);border-left-color:var(--steel);font-weight:500}
+.railfoot{position:absolute;bottom:30px;left:26px;right:20px;font-size:11px;color:var(--ink3);line-height:1.45}
+
+main{padding:40px 52px 96px;min-width:0}
+section{scroll-margin-top:24px;padding-top:66px}
+section:first-of-type{padding-top:0}
+.sh{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding-bottom:7px;margin-bottom:24px}
+.sh h2{font-size:21px;font-weight:700;font-variation-settings:'wdth' 106}
+.sh p{margin:0 0 0 auto;font-size:12px;color:var(--ink3);text-align:right}
+
+h1{font-size:clamp(32px,5vw,54px);font-weight:800;font-variation-settings:'wdth' 118;max-width:13ch}
+.dek{margin:18px 0 0;font-size:16px;color:var(--ink2);max-width:54ch;line-height:1.5}
+.stamp{font-size:11.5px;color:var(--ink3);margin-bottom:16px}
+.flag{margin-top:20px;border-left:2px solid var(--ochre);padding:1px 0 1px 14px;max-width:62ch}
+.flag b{font-weight:600}
+.flag p{margin:0;font-size:13px;color:var(--ink2);line-height:1.5}
+.strip{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);margin-top:30px}
+.strip div{padding:12px 12px 13px 0;border-right:1px solid var(--hair);display:flex;flex-direction:column}
+.strip div:last-child{border-right:0}
+.k{font-size:11px;color:var(--ink3);line-height:1.3}
+.v{font-family:"Archivo";font-variation-settings:'wdth' 98;font-weight:700;font-size:21px;line-height:1;margin-top:auto;padding-top:14px}
+.d{font-size:11px;margin-top:5px;color:var(--ink2)}
+.up{color:var(--grow)}.down{color:var(--fall)}
+
+.toggle{display:inline-flex;border:1px solid var(--ink);margin-bottom:16px}
+.toggle button{font:inherit;font-size:12.5px;background:none;border:0;padding:5px 14px;cursor:pointer;color:var(--ink2)}
+.toggle button+button{border-left:1px solid var(--ink)}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--panel);font-weight:500}
+.ladder{border-top:1px solid var(--hair)}
+.lrow{display:grid;grid-template-columns:168px 1fr 74px;align-items:stretch;width:100%;text-align:left;
+  background:none;border:0;border-bottom:1px solid var(--hair);padding:0;font:inherit;color:inherit;cursor:pointer}
+.lrow:hover .ln,.lrow[aria-current="true"] .ln{color:var(--ink);font-weight:500}
+.lrow[aria-current="true"]{background:var(--panel)}
+.ln{padding:0 14px 0 0;text-align:right;font-size:12.5px;color:var(--ink2);display:flex;align-items:center;justify-content:flex-end}
+.lt{position:relative;height:28px;border-left:1px solid var(--hair);border-right:1px solid var(--hair)}
+.ax{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--ink3)}
+.bar{position:absolute;top:7px;height:13px;width:0;transition:width .7s cubic-bezier(.2,.7,.3,1)}
+.bar.pos{left:50%;background:var(--grow)}
+.bar.neg{background:var(--fall)}
+.lv{padding:0 0 0 12px;font-size:12.5px;font-weight:500;display:flex;align-items:center}
+.detail{background:var(--panel);border:1px solid var(--rule);padding:16px 20px;margin-top:18px}
+.detail h3{font-size:16px;font-weight:700}
+.figs{display:flex;gap:26px;flex-wrap:wrap;margin:11px 0;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.figs div{font-size:11px;color:var(--ink3)}
+.figs b{display:block;font-family:"Archivo";font-weight:700;font-size:17px;color:var(--ink);margin-top:3px}
+.detail p{margin:0;font-size:13.5px;color:var(--ink2);max-width:74ch}
+
+.plotwrap{margin-top:36px;border-top:1px solid var(--hair);padding-top:16px}
+.plothead{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+.plothead h3{font-size:14px;font-weight:700;font-variation-settings:'wdth' 100}
+.plothead p{margin:0;font-size:11.5px;color:var(--ink3)}
+.plotbox{overflow-x:auto}
+svg{display:block}
+.gl{stroke:var(--hair);stroke-width:1}
+.zl{stroke:var(--ink3);stroke-width:1;stroke-dasharray:3 3}
+.tk{font-size:10px;fill:var(--ink3)}
+.axname{font-size:10.5px;fill:var(--ink2)}
+.zone{font-size:10px;fill:var(--ink3)}
+.lead{stroke:var(--ink3);stroke-width:.7;opacity:.55}
+.dl{font-size:10.5px;fill:var(--ink2)}
+.ser{fill:none;stroke-width:1.8}
+.sdot{stroke-width:1.5;fill:var(--panel)}
+.slab{font-size:10.5px;font-weight:500}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.mini{padding:18px 26px 20px 0;border-right:1px solid var(--rule)}
+.mini:last-child{border-right:0;padding-right:0}
+.mini+.mini{padding-left:26px}
+.mini h4{font-size:14px;font-weight:700;font-variation-settings:'wdth' 100;margin-bottom:3px}
+.mcap{font-size:11.5px;color:var(--ink3);margin:0 0 16px;line-height:1.4}
+.mrow{display:grid;grid-template-columns:74px 1fr 52px;align-items:center;gap:10px;margin-bottom:8px;font-size:11.5px}
+.mrow .lab{color:var(--ink2);text-align:right;line-height:1.2}
+.mtrack{height:15px;background:var(--hair);position:relative}
+.mtrack i{position:absolute;top:0;bottom:0;width:0;transition:width .7s cubic-bezier(.2,.7,.3,1)}
+.mtrack .ref{position:absolute;top:-4px;bottom:-4px;width:1px;background:var(--ochre)}
+.mrow .num{font-weight:500;text-align:right}
+.reflab{display:grid;grid-template-columns:74px 1fr 52px;gap:10px;font-size:10.5px;color:var(--ochre);margin-bottom:5px}
+.reflab span:nth-child(2){position:relative}
+.reflab em{position:absolute;font-style:normal;transform:translateX(-50%);white-space:nowrap}
+.mfoot{font-size:11px;color:var(--ink3);margin-top:12px;line-height:1.5}
+
+.tracks{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--ink)}
+.track:first-child{border-right:1px solid var(--rule)}
+.th{padding:11px 22px 12px 0;font-family:"Archivo";font-weight:700;font-size:14px;font-variation-settings:'wdth' 100}
+.th small{display:block;font-family:"IBM Plex Sans";font-weight:400;font-size:11.5px;color:var(--ink3);margin-top:3px}
+.track:last-child .th,.track:last-child .it,.track:last-child .firm{padding-left:22px;padding-right:0}
+.it{padding:10px 22px 11px 0;border-top:1px solid var(--hair)}
+.it .t{font-weight:500;font-size:13.5px;line-height:1.3}
+.it .w{font-size:12px;color:var(--ink2);margin-top:3px;line-height:1.45}
+.ex{display:flex;align-items:center;gap:8px;margin-top:7px}
+.exbar{height:3px;flex:0 0 96px;background:var(--hair);position:relative}
+.exbar i{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .6s}
+.exlab{font-size:10.5px;color:var(--ink3);white-space:nowrap}
+
+.firm{padding:10px 22px 11px 0;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start}
+.firm .t{font-weight:500;font-size:13.5px;line-height:1.3}
+.firm .w{font-size:12px;color:var(--ink2);line-height:1.45;margin-top:3px}
+.tag{font-size:10.5px;color:var(--ink3);white-space:nowrap;border:1px solid var(--hair);padding:2px 7px;margin-top:1px}
+
+.force{border-top:1px solid var(--hair)}
+.force:last-child{border-bottom:1px solid var(--hair)}
+.fb{width:100%;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;background:none;border:0;
+  padding:13px 0;font:inherit;text-align:left;color:inherit;cursor:pointer}
+.fb:hover .ft{color:var(--steel)}
+.ft{font-family:"Archivo";font-weight:700;font-size:15px;font-variation-settings:'wdth' 102;display:block}
+.fs{font-size:12px;color:var(--ink2);margin-top:3px;display:block;max-width:64ch;line-height:1.45}
+.fsg{font-size:10.5px;color:var(--ink3);white-space:nowrap;padding-top:3px}
+.fbody{display:none;padding:0 0 18px}
+.force.open .fbody{display:block}
+.fbody ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink2);max-width:70ch;line-height:1.5}
+.fbody li{margin-bottom:5px}
+.fbody .so{font-size:10.5px;color:var(--ink3);margin:10px 0 0}
+.nu{color:var(--ochre);font-size:10.5px;font-weight:500}
+
+.caps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.cp{padding:15px 22px 17px 0;border-right:1px solid var(--rule);border-bottom:1px solid var(--hair)}
+.cp:nth-child(3n){border-right:0;padding-right:0}
+.cp:not(:nth-child(3n+1)){padding-left:22px}
+.cp h4{font-size:13.5px;font-weight:700;font-variation-settings:'wdth' 100;line-height:1.2}
+.cp .amt{font-family:"Archivo";font-weight:700;font-size:18px;color:var(--steel);margin:6px 0 5px;font-variation-settings:'wdth' 94}
+.cp p{margin:0;font-size:11.5px;color:var(--ink2);line-height:1.5}
+.cp .j{margin-top:9px;font-size:11px;color:var(--ink3);border-left:2px solid var(--growSoft);padding-left:9px;line-height:1.4}
+
+.prov{border-top:1px solid var(--ink)}
+.pr{display:grid;grid-template-columns:158px 1fr 56px 90px;align-items:stretch;border-bottom:1px solid var(--hair);font-size:12.5px}
+.pr.h{color:var(--ink3);border-bottom:1px solid var(--rule);font-size:11px}
+.pr.h>div{padding-top:5px;padding-bottom:5px}
+.pn{padding:0 14px 0 0;display:flex;align-items:center;justify-content:flex-end;text-align:right}
+.pt{height:25px;position:relative;border-left:1px solid var(--hair)}
+.pb{position:absolute;left:0;top:7px;height:11px;background:var(--steel);width:0;transition:width .7s cubic-bezier(.2,.7,.3,1)}
+.pv{padding-left:12px;font-weight:500;display:flex;align-items:center}
+.pe{padding-left:12px;color:var(--ink2);display:flex;align-items:center}
+.pr.h .pn,.pr.h .pv,.pr.h .pe{display:block;text-align:right}
+.pr.h .pv,.pr.h .pe{text-align:left}
+.pnote{font-size:13px;color:var(--ink2);max-width:72ch;margin-top:16px}
+
+.lim{display:grid;grid-template-columns:1fr 1fr;gap:0 36px}
+.cav{border-left:2px solid var(--ochre);padding-left:14px;margin-bottom:20px}
+.cav h4{font-size:13.5px;font-weight:700;font-variation-settings:'wdth' 100;margin-bottom:3px}
+.cav p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.5}
+.src{font-size:11px;color:var(--ink3);line-height:1.65;max-width:80ch;margin-top:16px;border-top:1px solid var(--hair);padding-top:14px}
+.src b{color:var(--ink2);font-weight:500}
+
+@media(max-width:920px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--rule);padding:22px 20px}
+  .rail nav{flex-direction:row;flex-wrap:wrap;gap:0 14px}
+  .rail a{border-left:0;border-bottom:2px solid transparent;padding:4px 0}
+  .rail a.on{border-left:0;border-bottom-color:var(--steel)}
+  .railfoot{position:static;margin-top:14px}
+  main{padding:26px 20px 70px}
+  .strip{grid-template-columns:repeat(2,1fr)}
+  .strip div{border-bottom:1px solid var(--hair)}
+  .trio,.tracks,.caps,.lim{grid-template-columns:1fr}
+  .mini,.cp{border-right:0;padding-left:0!important;padding-right:0;border-bottom:1px solid var(--hair)}
+  .track:first-child{border-right:0;border-bottom:1px solid var(--ink)}
+  .track:last-child .th,.track:last-child .it,.track:last-child .firm{padding-left:0}
+  .it,.firm,.th{padding-right:0}
+  .lrow{grid-template-columns:104px 1fr 66px}
+  .ln{font-size:11.5px}
+  .pr{grid-template-columns:102px 1fr 54px}.pe{display:none}
+  .plotbox{margin:0 -20px;padding:0 20px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<aside class="rail">
+  <div class="mark">Canada's labour market<span>5 November 2026</span></div>
+  <nav id="nav">
+    <a href="#pulse" class="on">Pulse</a><a href="#sectors">Sectors</a><a href="#signals">Signals</a>
+    <a href="#roles">Roles</a><a href="#firms">Firms</a><a href="#forces">Forces</a>
+    <a href="#capital">Capital</a><a href="#regions">Regions</a><a href="#limits">Limits</a>
+  </nav>
+  <div class="railfoot">Statistics Canada Labour Force Survey, September 2026 — the latest release. October data arrives 6 November.</div>
+</aside>
+
+<main>
+
+<section id="pulse">
+  <div class="stamp">Reference week 13–19 September 2026</div>
+  <h1>Where Canada's jobs are going</h1>
+  <p class="dek">For two years the unemployment rate barely moved while the composition of Canadian work was rewritten underneath it. That quiet phase has ended.</p>
+  <div class="flag">
+    <p><b>Two things turned since the summer.</b> Employment has now fallen two months running, down 110,000 across August and September — and health care, the one sector that had grown every month since 2022, finally shrank. Meanwhile the Bank of Canada raised rates on 28 October, its first hike since 2023, because oil-driven inflation is near 3%. Policy is tightening into a weakening job market.</p>
+  </div>
+  <div class="strip">
+    <div><span class="k">Employed</span><span class="v">21.10M</span><span class="d down">&minus;68,000 in September</span></div>
+    <div><span class="k">Unemployment</span><span class="v">6.5%</span><span class="d down">+0.1 pts</span></div>
+    <div><span class="k">Participation</span><span class="v">64.8%</span><span class="d down">lowest since 1997</span></div>
+    <div><span class="k">Hourly wage</span><span class="v">$37.64</span><span class="d down">+2.3% vs 3.1% inflation</span></div>
+    <div><span class="k">Vacancies</span><span class="v">510K</span><span class="d">flat, 2.8% rate</span></div>
+    <div><span class="k">Policy rate</span><span class="v">2.50%</span><span class="d up">hiked 28 Oct</span></div>
+  </div>
+</section>
+
+<section id="sectors">
+  <div class="sh"><h2>Sector ladder</h2><p>All 16 industry groups. Select a row.</p></div>
+  <div class="toggle" role="group" aria-label="Period">
+    <button id="bY" aria-pressed="true">12 months</button><button id="bM" aria-pressed="false">September</button>
+  </div>
+  <div class="ladder" id="ladder"></div>
+  <div class="detail" id="detail" aria-live="polite"></div>
+
+  <div class="plotwrap">
+    <div class="plothead">
+      <h3>Size against growth</h3>
+      <p>Bubble area is employment. Horizontal position is 12-month change.</p>
+    </div>
+    <div class="plotbox"><div id="plot"></div></div>
+  </div>
+</section>
+
+<section id="signals">
+  <div class="sh"><h2>Three numbers</h2><p>The rest of the page follows from these.</p></div>
+  <div class="trio">
+
+    <div class="mini">
+      <h4>Real wages have turned negative</h4>
+      <p class="mcap">Year-over-year wage growth against inflation</p>
+      <div class="plotbox"><div id="wageplot"></div></div>
+      <p class="mfoot">Wage growth fell below inflation over the summer and has stayed there. Workers are now losing purchasing power for the first time since 2023.</p>
+    </div>
+
+    <div class="mini">
+      <h4>Labour supply cut on purpose</h4>
+      <p class="mcap">New temporary resident arrivals, target</p>
+      <div id="immig"></div>
+      <p class="mfoot">A 43% cut in one year; study permits roughly halve. Participation is now at a 29-year low. The 2027–2029 plan is still pending.</p>
+    </div>
+
+    <div class="mini">
+      <h4>Canada builds AI, barely uses it</h4>
+      <p class="mcap">Share of businesses using AI</p>
+      <div id="adopt"></div>
+      <p class="mfoot">The displacement has not arrived here yet. Neither has the productivity gain. That is runway, and it is finite.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="roles">
+  <div class="sh"><h2>Roles</h2><p>Bars show task exposure to current AI, not predicted job loss.</p></div>
+  <div class="tracks">
+    <div class="track"><div class="th">Opening up<small>Retirements, care demand, committed capital</small></div><div id="rise"></div></div>
+    <div class="track"><div class="th">Closing in<small>Fewer postings long before any layoffs</small></div><div id="fall"></div></div>
+  </div>
+</section>
+
+<section id="firms">
+  <div class="sh"><h2>Firms</h2><p>Funding and headcount have decoupled.</p></div>
+  <div class="tracks">
+    <div class="track"><div class="th">Rising<small>Recent rounds, Canadian footprint</small></div><div id="ch"></div></div>
+    <div class="track"><div class="th">Established<small>Position secure, headcount plans less so</small></div><div id="in"></div></div>
+  </div>
+</section>
+
+<section id="forces">
+  <div class="sh"><h2>Forces</h2><p>Select to expand.</p></div>
+  <div id="forcelist"></div>
+</section>
+
+<section id="capital">
+  <div class="sh"><h2>Capital</h2><p>Job figures are government targets, not forecasts.</p></div>
+  <div class="caps" id="caps"></div>
+</section>
+
+<section id="regions">
+  <div class="sh"><h2>Regions</h2><p>Unemployment rate, September 2026.</p></div>
+  <div class="prov">
+    <div class="pr h"><div class="pn">Province</div><div></div><div class="pv">Rate</div><div class="pe">Employed</div></div>
+    <div id="provs"></div>
+  </div>
+  <p class="pnote">Quebec is now the clear weak spot: down 49,000 in September and 130,000 since January, a 2.8% contraction. Alberta is the one bright province, adding 23,000. Ontario slipped 20,000 in the month but remains up 86,000 over the year. Newfoundland and Labrador is highest at 9.1%.</p>
+</section>
+
+<section id="limits">
+  <div class="sh"><h2>Limits</h2><p>Read before acting on any of the above.</p></div>
+  <div class="lim">
+    <div class="cav"><h4>October data lands tomorrow</h4><p>This page reflects the September survey, released 9 October. Statistics Canada publishes October figures on 6 November, which could confirm or break the two-month decline.</p></div>
+    <div class="cav"><h4>Monthly moves are mostly noise</h4><p>The survey samples 65,000 households. Two consecutive declines are harder to dismiss than one, but six-month trends remain the real signal.</p></div>
+    <div class="cav"><h4>Exposure is not job loss</h4><p>Exposure scores measure what AI could do to a job's tasks, not what employers have done. Roughly 90% of AI-adopting Canadian firms report no staffing change.</p></div>
+    <div class="cav"><h4>Trade and immigration are both unresolved</h4><p>Talks on easing steel and auto tariffs resumed in late October with no deal announced, and US duties are set to rise on 1 January. The 2027–2029 immigration plan has not been tabled.</p></div>
+  </div>
+  <div class="src"><b>Statistics Canada</b> Labour Force Survey September 2026 (released 9 October); Job Vacancy and Wage Survey Q2 2026 (released 15 September); AI occupational exposure research 2024–26. <b>Bank of Canada</b> rate decision and Monetary Policy Report, 28 October 2026; early signs of AI-driven labour adjustment, August 2026. <b>Government of Canada</b> AI for All strategy; Defence Industrial Strategy; critical minerals programs; 2026–2028 Immigration Levels Plan. <b>BuildForce Canada</b> 2025–2034 outlook. <b>Conference Board of Canada.</b> Trade status from Reuters and CBC reporting, late October 2026. Company figures from public announcements.</div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* September 2026 LFS, Table 2. lvl/yoy in thousands; mom = Aug→Sep change */
+const sectors=[
+{n:"Health care and social assistance",s:"Health care",lvl:2992.8,yoy:93.0,yoyp:3.2,mom:-23.1,b:"Still the largest source of net job growth, but September broke a streak: the first monthly decline since December 2022. Annual growth has cooled from 4.5% to 3.2%. Health vacancies are also down 7.9% year over year, which suggests budget limits rather than satisfied demand — the demographic need has not changed."},
+{n:"Transportation and warehousing",s:"Transport",lvl:1119.2,yoy:52.8,yoyp:5.0,mom:-1.2,b:"Now the fastest-growing large sector in absolute terms. E-commerce volume plus freight rerouting away from US corridors. Trucking HR Canada projects vacancies above 40,000 by 2030. Autonomy is the long-run risk, not the near-term one."},
+{n:"Information, culture and recreation",s:"Info & culture",lvl:879.1,yoy:43.3,yoyp:5.2,mom:-11.0,b:"Fastest percentage growth in the economy, though it gave back 11,000 in September. Gains concentrate in data and digital infrastructure; legacy media keeps shrinking inside the aggregate."},
+{n:"Other services",s:"Other services",lvl:814.0,yoy:32.2,yoyp:4.1,mom:17.0,b:"Repair, personal care, civic organisations — and the strongest September gain of any sector at +17,000. A large share of the annual growth is self-employment, which is part entrepreneurship and part inability to find an employer."},
+{n:"Professional, scientific and technical",s:"Professional",lvl:2037.4,yoy:29.8,yoyp:1.5,mom:10.6,b:"Growing in aggregate, restructuring inside. Senior and licensed roles expand while junior analyst and entry-level coding hiring slows hardest. Vacancies in applied sciences rose 4.5% in Q2, led by software developers — the first real sign of thaw in two years."},
+{n:"Construction",s:"Construction",lvl:1646.8,yoy:20.0,yoyp:1.2,mom:-0.7,b:"Flat headline hiding a succession gap. One in five workers is over 55. BuildForce projects 270,000 retirements against a 380,000 hiring requirement by 2034. A higher policy rate will not help residential activity."},
+{n:"Business and building support",s:"Business support",lvl:693.4,yoy:19.1,yoyp:2.8,mom:6.1,b:"Recovered 6,100 in September after August's 20,000 collapse. Call centres, admin support, security. The most directly exposed large services category to task automation."},
+{n:"Accommodation and food services",s:"Accommodation",lvl:1194.9,yoy:10.5,yoyp:0.9,mom:1.0,b:"Barely moving. A heavy user of temporary foreign workers and international students, so the 43% cut to new arrivals removes much of its hiring pool — the constraint is becoming supply, not demand."},
+{n:"Manufacturing",s:"Manufacturing",lvl:1834.3,yoy:-12.9,yoyp:-0.7,mom:-12.7,b:"Gave back most of August's surprise gain. Split sector: export-facing steel, aluminum and lumber contract under 50% tariffs while defence and domestic production hold up. Manufacturing vacancies are up 19.2% year over year, so demand exists where tariffs do not bite."},
+{n:"Utilities",s:"Utilities",lvl:156.1,yoy:-9.9,yoyp:-6.0,mom:-0.5,b:"Largest percentage decline, though a small and volatile sector. Watch the other direction: grid expansion for data centres and the Darlington SMR need substantial electrical capacity later this decade."},
+{n:"Natural resources",s:"Natural resources",lvl:327.9,yoy:-10.1,yoyp:-3.0,mom:-3.5,b:"Lumber in multi-year decline, roughly 20% below 2024 exports. Against that, $3.6B in new critical minerals programs — but those projects hire late this decade, not now. Related vacancies fell 10.4% in Q2."},
+{n:"Agriculture",s:"Agriculture",lvl:216.8,yoy:-13.9,yoyp:-6.0,mom:1.6,b:"Down 6.0% over the year, tied for the steepest percentage fall. Exposed on both sides: the heaviest user of the Temporary Foreign Worker Program, which takes the sharpest cut, and material direct losses under the 50% tariff scenario."},
+{n:"Public administration",s:"Public admin",lvl:1229.1,yoy:-18.8,yoyp:-1.5,mom:-2.8,b:"Part of a broader public sector contraction: 70,000 jobs lost across the public sector in September alone, a fourth consecutive monthly decline, and 119,000 over the year. Government has absorbed graduate hiring for two decades; that absorber is switched off."},
+{n:"Finance, insurance and real estate",s:"Finance",lvl:1478.6,yoy:-25.7,yoyp:-1.7,mom:-3.9,b:"Shrinking while the banks are profitable. CIBC has ~50,000 staff on an internal AI assistant; RBC drafts pitch decks with it. The work is not disappearing — the junior seats are."},
+{n:"Wholesale and retail trade",s:"Retail & wholesale",lvl:2944.7,yoy:-46.9,yoyp:-1.6,mom:-9.6,b:"Second-largest absolute decline. Slower population growth removes the customer arrivals that propped up expansion, automation cuts floor staff, and tariff pass-through on appliances and furniture squeezes spending."},
+{n:"Educational services",s:"Education",lvl:1539.8,yoy:-67.4,yoyp:-4.2,mom:-35.3,b:"Now the worst-performing sector in the economy, overtaking retail. September alone took 35,000 jobs after seven flat months — the study permit cap working through institutional budgets with a lag. Arrivals were cut from 305,000 to 155,000, and related vacancies are down 13.3% year over year."}];
+
+const rise=[
+{t:"Nurses, LPNs, personal support workers",w:"Still +93,000 over the year despite September's dip. Licensing and budgets are the bottleneck, not demand.",e:12},
+{t:"Electricians, pipefitters, welders, HVAC",w:"Most acute structural shortage in the country. 8,000–9,000 apprenticeship hours means supply cannot respond fast.",e:15},
+{t:"Data centre and grid trades",w:"Sovereign compute buildout targets 100+ MW. Every megawatt needs electrical and cooling capacity.",e:14},
+{t:"Defence manufacturing and machinists",w:"Strategy targets 125,000 careers against ~$180B direct investment, with Canadian-supplier preference.",e:22},
+{t:"Mining engineers and metallurgists",w:"$3.6B in new federal programs, five projects referred to the Major Projects Office.",e:25},
+{t:"Software developers and data engineers",w:"Applied-science vacancies rose 4.5% in Q2, a second straight quarterly gain led by developers. First thaw since 2023.",e:52},
+{t:"Cybersecurity and AI assurance",w:"Shortage-risk occupation through 2033. Model evaluation and red-teaming are new job families.",e:38},
+{t:"Truck drivers and logistics supervisors",w:"Transport is now the fastest-growing large sector, +5.0%. Projected vacancies above 40,000 by 2030.",e:33},
+{t:"Skilled manufacturing trades",w:"Manufacturing vacancies up 19.2% year over year — demand is real wherever tariffs do not reach.",e:26}];
+
+const fall=[
+{t:"Office clerks and data entry",w:"Statistics Canada identifies clerical work as carrying the highest generative-AI risk of any occupation group.",e:88},
+{t:"Customer service and call centre",w:"Banks and insurers are routing routine queries to internal assistants at scale.",e:82},
+{t:"Administrative assistants",w:"Scheduling, drafting and data processing are exactly the task bundle current tools handle well.",e:79},
+{t:"Bookkeeping and routine audit",w:"Compliance work grows; transaction processing shrinks. Vacancies down year over year.",e:71},
+{t:"Teachers and post-secondary staff",w:"Education lost 67,400 jobs over the year and 35,000 in September alone — now the economy's worst sector.",e:34},
+{t:"Retail cashiers and floor staff",w:"Retail is down 46,900 over the year. Automation compounds a demand shortfall from slower population growth.",e:68},
+{t:"Junior analysts and entry-level developers",w:"In coding jobs, under-30 employment was flat while the 30–49 cohort rose nearly 30%. The bottom rung broke.",e:64},
+{t:"Articling students and paralegal support",w:"Document review and first drafts were the training tasks that made junior legal roles viable.",e:61},
+{t:"Public servants, federal and provincial",w:"Public sector employment fell 70,000 in September and 119,000 over the year. Four straight monthly declines.",e:45},
+{t:"Export steel, aluminum and lumber production",w:"Steel exports to the US roughly halved. US duties are scheduled to rise again on 1 January 2027.",e:18}];
+
+const ch=[
+{t:"Waabi",w:"Autonomous trucking. US$750M Series C plus ~$250M from Uber — largest raise in Canadian tech history.",g:"Toronto"},
+{t:"Cohere",w:"Enterprise LLMs. $500M Series E led by PSP Investments. The domestic option for regulated buyers.",g:"Toronto"},
+{t:"Dominion Dynamics",w:"$100M Series A — Canada's largest defence-tech Series A to date, per lead investor Georgian.",g:"Defence"},
+{t:"Taalas",w:"AI silicon. Bakes models directly into chips. Among the top-scored Canadian AI startups of 2026.",g:"Toronto"},
+{t:"Tenstorrent",w:"AI processors. One of few non-US firms with standing in accelerator design.",g:"Toronto"},
+{t:"Trulioo",w:"Identity verification. $150M Series D led by Goldman Sachs AM, covering 195+ countries.",g:"Vancouver"},
+{t:"Miovision",w:"$120M to scale AI intersection management into US and European smart-city contracts.",g:"Waterloo"},
+{t:"Sanctuary AI",w:"Humanoid robotics. Canada's clearest bet on physical rather than knowledge-work automation.",g:"Vancouver"}];
+
+const inc=[
+{t:"RBC, CIBC, TD",w:"Profitable, expanding AI internally. CIBC has ~50,000 staff on an internal assistant.",g:"Sector −25.7K"},
+{t:"Shopify",w:"Headcount down from ~11,600 at peak to ~8,100. Teams must justify why AI cannot do the work first.",g:"Shrinking"},
+{t:"Celestica, Hypertec, Ranovus",w:"Compute hardware, cooling, optical interconnect. Named in the national strategy's supply chain.",g:"Hiring"},
+{t:"eStruxture, Denvr, ThinkOn",w:"Data centres and sovereign cloud. Residency rules give domestic providers a procurement edge.",g:"Buildout"},
+{t:"Bombardier, CAE, Irving, Davie",w:"Defence and aerospace primes positioned against a generational procurement wave.",g:"Hiring"},
+{t:"Wealthsimple, Clio, 1Password",w:"Mature scale-ups at $10B, ~$5B and unicorn valuations. Past rapid headcount expansion.",g:"Selective"},
+{t:"Telus, Bell, Rogers",w:"Central to the connectivity pillar, and simultaneously running cost reduction.",g:"Flat to down"},
+{t:"Mila, Vector, Amii",w:"Not employers at scale but the talent source. Mila alone has 1,400+ researchers.",g:"Pipeline"}];
+
+const forces=[
+{t:"Policy is tightening into a weakening job market",s:"The Bank of Canada hiked to 2.50% on 28 October — its first increase since July 2023.",g:"New",nu:1,
+b:`<ul><li>The move ended seven consecutive holds. Headline inflation was 3.1% in September and the Bank expects roughly 3.5% by year-end, driven by oil.</li>
+<li>Inflation excluding gasoline eased to 2.2%, so this is an energy shock the Bank is trying to stop from spreading, not broad overheating.</li>
+<li>It projects GDP growth of 1% in 2026, then 2% in 2027 and 2028, with inflation averaging 3% next year and returning to target by mid-2028.</li>
+<li>The Bank signalled more increases may be needed and said it will "proceed carefully." A Reuters poll expects another hike by end-March. Next decision: 9 December.</li>
+<li>The tension is the story: employment fell 110,000 across August and September while borrowing costs went up. Rate relief is no longer the backstop for a soft labour market.</li></ul>
+<p class="so">Bank of Canada, 28 October 2026</p>`},
+
+{t:"The one reliable engine stalled",s:"Health care shrank in September for the first time since December 2022.",g:"New",nu:1,
+b:`<ul><li>Down 23,100 in the month, though still up 93,000 over the year. Annual growth has cooled from 4.5% to 3.2%.</li>
+<li>Health occupation vacancies fell 7.9% year over year, which points to hiring budgets rather than satisfied demand.</li>
+<li>Nothing has changed demographically. An aging population still needs care, so this reads as a fiscal constraint — provinces restraining spending — rather than a structural turn.</li>
+<li>It matters because health care had been absorbing roughly 60% of all net job creation. Without it, the economy has no reliable growth engine left.</li></ul>
+<p class="so">Statistics Canada, September 2026</p>`},
+
+{t:"Labour supply is being cut deliberately",s:"New temporary resident arrivals fall 43% in one year. Participation is now at a 29-year low.",g:"Supply",
+b:`<ul><li>Study permit arrivals drop from 305,000 to 155,000. The Temporary Foreign Worker stream takes the sharpest proportional cut.</li>
+<li>The participation rate fell to 64.8% in September, its lowest since December 1997 excluding 2020. Statistics Canada attributes the annual decline mainly to population aging.</li>
+<li>Permanent resident admissions hold at 380,000 through 2028. The 2027–2029 plan was expected in early November and has not yet been tabled.</li>
+<li>It removes workers from agriculture, construction, hospitality and elder care — and removes consumers from retail, rental housing and education.</li>
+<li>It also flatters the jobless rate: a shrinking labour force shrinks the denominator. Employment fell 68,000 in September and the rate rose only 0.1 points.</li></ul>
+<p class="so">IRCC 2026–2028 Immigration Levels Plan; Statistics Canada</p>`},
+
+{t:"Real wages have turned negative",s:"Wages up 2.3% against 3.1% inflation. Workers are losing purchasing power.",g:"Distribution",
+b:`<ul><li>Wage growth averaged 4.9% across 2023–24, decelerated to 3.4% in 2025, bottomed at 2.0% in August and ticked up to 2.3% in September.</li>
+<li>Inflation has run near 3% since April. The crossover happened over the summer and the gap is now roughly a point.</li>
+<li>The August quartile breakdown showed the squeeze is uneven: the bottom 25% of earners saw 1.1% growth against 2.1% for the top quartile.</li>
+<li>A labour shortage narrative and falling real wages do not coexist easily — which suggests shortages are concentrated in specific licensed occupations rather than general.</li></ul>
+<p class="so">Statistics Canada, September 2026, not seasonally adjusted</p>`},
+
+{t:"AI is compressing entry, not eliminating jobs",s:"About 60% of jobs are highly exposed. Roughly 90% of adopting firms report no staffing change.",g:"Structural",
+b:`<ul><li>Roughly half of exposed roles are complementary rather than substitutable. Complementary roles grew 2.9% over 2023–24 against 1.6% for competing roles.</li>
+<li>The Bank of Canada puts the job-finding gap between full-exposure and no-exposure occupations at about &minus;14 points by 2025, from &minus;2 before 2020.</li>
+<li>In coding-intensive work, employment for ages 15–29 was flat while ages 30–49 rose nearly 30%.</li>
+<li>Youth employment fell 48,000 in September, a two-month drop of 67,000, with the youth jobless rate at 13.0%.</li>
+<li>The tasks given to juniors — first drafts, data cleaning, document review — were the tasks that taught them the job.</li></ul>
+<p class="so">Bank of Canada; Statistics Canada; Conference Board of Canada</p>`},
+
+{t:"A retirement wave training cannot match",s:"Roughly 700,000 tradespeople retire by 2030. One in five construction workers is already over 55.",g:"Demographic",
+b:`<ul><li>Apprenticeship registrations hit a record 101,541 in 2024 and the country still falls behind — licensed trades take 8,000–9,000 hours.</li>
+<li>BuildForce projects ~270,000 construction retirements against a 380,000 hiring requirement, a potential shortfall near 108,000 by 2034.</li>
+<li>Ontario alone needs ~126,100 new construction workers by 2035 as ~92,000 retire.</li>
+<li>Non-residential grows 7% to ~700,000 workers by 2035; residential dips through 2028, and a higher policy rate makes that dip deeper.</li></ul>
+<p class="so">BuildForce Canada 2025–2034 outlook</p>`},
+
+{t:"The tariff wall is narrow but deep",s:"Talks resumed in late October. US duties are scheduled to rise again on 1 January.",g:"Trade",
+b:`<ul><li>Sectoral tariffs cover about 1% of Canadian employment and roughly 15% of exports — small nationally, concentrated locally in Hamilton, Sault Ste. Marie and Saguenay.</li>
+<li>Steel exports to the US have roughly halved under a 50% tariff. Aluminum fell about 50% before partial redirection to Europe at lower margins.</li>
+<li>Negotiations on easing Section 232 steel and auto tariffs restarted in late October after August's collapse. No deal has been announced, and Canadian industry sources expect a narrow one at best.</li>
+<li>Steel and auto duties are set to rise to 50% on 1 January 2027 absent an agreement.</li>
+<li>Manufacturing vacancies are nonetheless up 19.2% year over year, which says the damage is specific to export exposure rather than general.</li></ul>
+<p class="so">Bank of Canada tariff analysis; Reuters and CBC reporting, late October 2026</p>`}];
+
+const caps=[
+{h:"AI for All",a:"~$2B federal",p:"Sovereign compute, a public supercomputer for researchers and SMEs, Canadian data residency, AI literacy for a million students.",j:"Targets 250,000 jobs and 90,000 youth placements by 2031"},
+{h:"Defence Industrial Strategy",a:"~$180B investment",p:"Canadian-supplier preference in procurement, domestic defence innovation funding, streamlined acquisition.",j:"Targets 125,000 careers across the supply chain"},
+{h:"Critical minerals",a:"$3.6B in programs",p:"$1.5B First and Last Mile Fund for mine infrastructure, $165.2M across 22 projects in eight provinces.",j:"Mining and processing roles, remote and northern"},
+{h:"Sovereign compute",a:"Up to $700M public",p:"Public supercomputer, a secure NRC facility, and Canadian AI data capacity scaling to at least 100 MW.",j:"Electrical and cooling trades before any software role"},
+{h:"Darlington SMR",a:"First in the G7",p:"First of four units at Bowmanville, Ontario, powering around 300,000 homes.",j:"1,600 construction jobs, 200 long-term"},
+{h:"Private investment target",a:"$500B over 5 years",p:"Anchored by the September 2026 Investment Summit on energy, minerals, AI, defence and infrastructure.",j:"A target, not a commitment"}];
+
+const provs=[
+{n:"Newfoundland and Labrador",r:9.1,e:"247,000"},{n:"Ontario",r:7.0,e:"8,287,000"},
+{n:"New Brunswick",r:7.2,e:"408,000"},{n:"Alberta",r:6.4,e:"2,684,000"},
+{n:"British Columbia",r:6.4,e:"2,929,000"},{n:"Quebec",r:6.0,e:"4,540,000"},
+{n:"Prince Edward Island",r:7.6,e:"97,000"},{n:"Nova Scotia",r:6.2,e:"540,000"},
+{n:"Saskatchewan",r:6.0,e:"621,000"},{n:"Manitoba",r:5.2,e:"752,000"}];
+provs.sort((a,b)=>b.r-a.r);
+
+/* ── ladder ─────────────────────────────── */
+let mode="yoy",current=sectors[0].n;
+const L=document.getElementById('ladder'),D=document.getElementById('detail');
+const f=v=>(v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(1)+"K";
+
+function draw(){
+  const rows=[...sectors].sort((a,b)=>b[mode]-a[mode]),max=Math.max(...rows.map(r=>Math.abs(r[mode])));
+  L.innerHTML="";
+  rows.forEach((s,i)=>{
+    const v=s[mode],p=(Math.abs(v)/max)*47;
+    const b=document.createElement('button');
+    b.className='lrow';b.setAttribute('aria-current',s.n===current);
+    b.innerHTML=`<span class="ln">${s.s}</span><span class="lt"><span class="ax"></span><span class="bar ${v>=0?'pos':'neg'}"></span></span><span class="lv ${v>=0?'up':'down'}">${f(v)}</span>`;
+    b.onclick=()=>sel(s.n);L.appendChild(b);
+    const bar=b.querySelector('.bar');
+    if(v<0)bar.style.left=(50-p)+'%';
+    requestAnimationFrame(()=>setTimeout(()=>bar.style.width=p+'%',i*20));
+  });
+}
+function sel(n){
+  current=n;const s=sectors.find(x=>x.n===n);
+  D.innerHTML=`<h3>${s.n}</h3><div class="figs">
+    <div>Employed<b>${s.lvl.toFixed(1)}K</b></div>
+    <div>12-month<b class="${s.yoy>=0?'up':'down'}">${f(s.yoy)}</b></div>
+    <div>Percent<b class="${s.yoyp>=0?'up':'down'}">${s.yoyp>0?'+':'−'}${Math.abs(s.yoyp)}%</b></div>
+    <div>September<b class="${s.mom>=0?'up':'down'}">${f(s.mom)}</b></div></div><p>${s.b}</p>`;
+  [...L.children].forEach(r=>r.setAttribute('aria-current',r.querySelector('.ln').textContent===s.s));
+}
+document.getElementById('bY').onclick=()=>{mode="yoy";tog();draw()};
+document.getElementById('bM').onclick=()=>{mode="mom";tog();draw()};
+function tog(){document.getElementById('bY').setAttribute('aria-pressed',mode==="yoy");
+  document.getElementById('bM').setAttribute('aria-pressed',mode==="mom")}
+
+/* ── bubble chart ───────────────────────── */
+(function(){
+  const W=880,H=420,ml=58,mr=136,mt=30,mb=52;
+  const xmin=-7.5,xmax=6.5,ymax=3300;
+  const X=v=>ml+((v-xmin)/(xmax-xmin))*(W-ml-mr);
+  const Y=v=>H-mb-(v/ymax)*(H-mt-mb);
+  const R=v=>Math.sqrt(v/Math.PI)*0.72;
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  let g='';
+  [0,1000,2000,3000].forEach(t=>{
+    g+=`<line class="gl" x1="${ml}" y1="${Y(t).toFixed(1)}" x2="${W-mr}" y2="${Y(t).toFixed(1)}"/>`;
+    g+=`<text class="tk" x="${ml-10}" y="${(Y(t)+3.5).toFixed(1)}" text-anchor="end">${t?t/1000+'M':'0'}</text>`;
+  });
+  g+=`<text class="axname" x="${ml-10}" y="${mt-10}" text-anchor="end">Employed</text>`;
+  g+=`<line class="gl" x1="${ml}" y1="${H-mb}" x2="${W-mr}" y2="${H-mb}"/>`;
+  [-6,-4,-2,0,2,4,6].forEach(t=>{
+    g+=`<line class="gl" x1="${X(t).toFixed(1)}" y1="${H-mb}" x2="${X(t).toFixed(1)}" y2="${H-mb+5}"/>`;
+    g+=`<text class="tk" x="${X(t).toFixed(1)}" y="${H-mb+18}" text-anchor="middle">${t>0?'+':t<0?'−':''}${Math.abs(t)}%</text>`;
+  });
+  g+=`<text class="axname" x="${((ml+W-mr)/2).toFixed(1)}" y="${H-mb+36}" text-anchor="middle">12-month change in employment</text>`;
+  g+=`<line class="zl" x1="${X(0).toFixed(1)}" y1="${mt}" x2="${X(0).toFixed(1)}" y2="${H-mb}"/>`;
+  g+=`<text class="zone" x="${(X(0)-8).toFixed(1)}" y="${mt+2}" text-anchor="end">shrinking</text>`;
+  g+=`<text class="zone" x="${(X(0)+8).toFixed(1)}" y="${mt+2}">growing</text>`;
+
+  const pts=sectors.map(d=>({d,x:X(d.yoyp),y:Y(d.lvl),r:R(d.lvl)}));
+  pts.sort((a,b)=>b.r-a.r);
+  pts.forEach(p=>{
+    const c=p.d.yoyp>=0?'var(--grow)':'var(--fall)';
+    g+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${c}" fill-opacity=".15" stroke="${c}" stroke-width="1.3"><title>${esc(p.d.n)} — ${p.d.lvl.toFixed(0)}K, ${p.d.yoyp>0?'+':''}${p.d.yoyp}%</title></circle>`;
+    g+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="1.6" fill="${c}"/>`;
+  });
+  /* Label placement: pick the side of each bubble with fewer obstructions,
+     then separate labels vertically while keeping them clear of every bubble. */
+  const CH=5.45,FH=13,HH=5.5,GAP=8;
+  const box=l=>l.side>0
+    ? {x0:l.x, x1:l.x+l.w, y0:l.y-HH, y1:l.y+HH}
+    : {x0:l.x-l.w, x1:l.x, y0:l.y-HH, y1:l.y+HH};
+  // overlap depth between a label box and a circle (0 when clear)
+  const hitC=(b,c)=>{
+    const nx=Math.max(b.x0,Math.min(c.x,b.x1)), ny=Math.max(b.y0,Math.min(c.y,b.y1));
+    const d=Math.hypot(c.x-nx,c.y-ny);
+    return Math.max(0,c.r+2-d);
+  };
+  const penalty=l=>{
+    const b=box(l);
+    let s=0;
+    pts.forEach(c=>{ if(c!==l.p) s+=hitC(b,c); });
+    if(b.x1>W-mr+124) s+=(b.x1-(W-mr+124))*3;   // keep inside the right gutter
+    if(b.x0<ml+2) s+=(ml+2-b.x0)*3;
+    return s;
+  };
+
+  const labs=pts.map(p=>({p,txt:p.d.s,w:p.d.s.length*CH,y:p.y,ay:p.y,side:1,x:0}));
+  labs.forEach(l=>{
+    l.side=1; l.x=l.p.x+l.p.r+GAP; const right=penalty(l);
+    l.side=-1; l.x=l.p.x-l.p.r-GAP; const left=penalty(l);
+    if(right<=left){ l.side=1; l.x=l.p.x+l.p.r+GAP; }
+  });
+
+  for(let it=0;it<260;it++){
+    let moved=false;
+    // label vs label
+    for(let i=0;i<labs.length;i++)for(let j=i+1;j<labs.length;j++){
+      const a=labs[i],b=labs[j],A=box(a),B=box(b);
+      const dy=Math.abs(a.y-b.y), ox=!(A.x1<B.x0-2||B.x1<A.x0-2);
+      if(ox&&dy<FH){
+        const push=(FH-dy)/2+.4;
+        if(a.y<=b.y){a.y-=push;b.y+=push}else{a.y+=push;b.y-=push}
+        moved=true;
+      }
+    }
+    // label vs bubble
+    labs.forEach(l=>{
+      const b=box(l);
+      pts.forEach(c=>{
+        if(c===l.p) return;
+        const d=hitC(b,c);
+        if(d>0){ l.y += (l.y<c.y ? -1 : 1)*Math.min(d,2.2); moved=true; }
+      });
+    });
+    labs.forEach(l=>{ l.y=Math.max(mt+8,Math.min(H-mb-5,l.y)); });
+    if(!moved) break;
+  }
+
+  labs.forEach(l=>{
+    const anchor=l.side>0?l.p.x+l.p.r+3:l.p.x-l.p.r-3;
+    const tip=l.side>0?l.x-3:l.x+3;
+    if(Math.abs(l.y-l.ay)>3)
+      g+=`<line class="lead" x1="${anchor.toFixed(1)}" y1="${l.ay.toFixed(1)}" x2="${tip.toFixed(1)}" y2="${l.y.toFixed(1)}"/>`;
+    g+=`<text class="dl" x="${l.x.toFixed(1)}" y="${(l.y+3.5).toFixed(1)}" text-anchor="${l.side>0?'start':'end'}">${esc(l.txt)}</text>`;
+  });
+  document.getElementById('plot').innerHTML=
+    `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="max-width:100%;height:auto;min-width:660px" role="img" aria-label="Bubble chart: sector employment against 12-month growth rate">${g}</svg>`;
+})();
+
+/* ── wage vs inflation line chart ───────── */
+(function(){
+  const W=300,H=168,ml=26,mr=14,mt=22,mb=28;
+  const months=["Jun","Jul","Aug","Sep"];
+  const wage=[3.3,2.8,2.0,2.3], infl=[2.9,3.0,3.1,3.1];
+  const ymin=1.5,ymax=3.6;
+  const X=i=>ml+(i/(months.length-1))*(W-ml-mr);
+  const Y=v=>H-mb-((v-ymin)/(ymax-ymin))*(H-mt-mb);
+  let g='';
+  [2,2.5,3,3.5].forEach(t=>{
+    g+=`<line class="gl" x1="${ml}" y1="${Y(t).toFixed(1)}" x2="${W-mr}" y2="${Y(t).toFixed(1)}"/>`;
+    g+=`<text class="tk" x="${ml-5}" y="${(Y(t)+3.3).toFixed(1)}" text-anchor="end">${t}</text>`;
+  });
+  months.forEach((m,i)=>{
+    g+=`<text class="tk" x="${X(i).toFixed(1)}" y="${H-mb+15}" text-anchor="middle">${m}</text>`;
+  });
+  // shaded gap where inflation exceeds wages
+  let up=[],dn=[];
+  months.forEach((m,i)=>{up.push(`${X(i).toFixed(1)},${Y(infl[i]).toFixed(1)}`);dn.push(`${X(i).toFixed(1)},${Y(wage[i]).toFixed(1)}`)});
+  g+=`<polygon points="${up.concat(dn.reverse()).join(' ')}" fill="var(--fall)" fill-opacity=".09"/>`;
+  const line=(arr,col,dash)=>`<polyline class="ser" points="${arr.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ')}" stroke="${col}"${dash?' stroke-dasharray="4 3"':''}/>`;
+  g+=line(infl,'var(--ochre)',1);
+  g+=line(wage,'var(--steel)',0);
+  wage.forEach((v,i)=>g+=`<circle class="sdot" cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="2.6" stroke="var(--steel)"/>`);
+  g+=`<text class="slab" x="${(W-mr).toFixed(1)}" y="${(Y(infl[3])-7).toFixed(1)}" text-anchor="end" fill="var(--ochre)">Inflation 3.1%</text>`;
+  g+=`<text class="slab" x="${(W-mr).toFixed(1)}" y="${(Y(wage[3])+14).toFixed(1)}" text-anchor="end" fill="var(--steel)">Wages 2.3%</text>`;
+  document.getElementById('wageplot').innerHTML=
+    `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;height:auto" role="img" aria-label="Line chart: wage growth below inflation, June to September 2026">${g}</svg>`;
+})();
+
+/* ── mini bar charts ────────────────────── */
+function bar(lab,w,num,col,left,ref){
+  return `<div class="mrow"><span class="lab">${lab}</span><span class="mtrack">`+
+    `<i data-w="${w}" style="background:${col};left:${left||0}%"></i>`+
+    (ref?`<span class="ref" style="left:${ref}%"></span>`:'')+
+    `</span><span class="num">${num}</span></div>`;
+}
+document.getElementById('immig').innerHTML=
+  bar("2025 actual",100,"674K","var(--ink)")+
+  bar("2026 target",57,"385K","var(--fall)")+
+  bar("2027 target",55,"370K","var(--fall)");
+document.getElementById('adopt').innerHTML=
+  bar("Canada",20,"12%","var(--fall)")+
+  bar("Nordics",22,"29–42%","var(--grow)",48)+
+  bar("2034 goal",100,"60%","var(--steelSoft)");
+
+/* ── lists ──────────────────────────────── */
+const role=(r,c)=>`<div class="it"><div class="t">${r.t}</div><div class="w">${r.w}</div>
+<div class="ex"><span class="exbar"><i data-w="${r.e}" style="background:${c}"></i></span><span class="exlab">${r.e}% exposure</span></div></div>`;
+document.getElementById('rise').innerHTML=rise.map(r=>role(r,'var(--growSoft)')).join('');
+document.getElementById('fall').innerHTML=fall.map(r=>role(r,'var(--fall)')).join('');
+const firm=x=>`<div class="firm"><div><div class="t">${x.t}</div><div class="w">${x.w}</div></div><span class="tag">${x.g}</span></div>`;
+document.getElementById('ch').innerHTML=ch.map(firm).join('');
+document.getElementById('in').innerHTML=inc.map(firm).join('');
+
+const FL=document.getElementById('forcelist');
+forces.forEach((x,i)=>{
+  const d=document.createElement('div');d.className='force';
+  d.innerHTML=`<button class="fb" aria-expanded="false" aria-controls="f${i}"><span><span class="ft">${x.t}</span><span class="fs">${x.s}</span></span><span class="${x.nu?'nu':'fsg'}">${x.g}</span></button><div class="fbody" id="f${i}">${x.b}</div>`;
+  const b=d.querySelector('button');
+  b.onclick=()=>b.setAttribute('aria-expanded',d.classList.toggle('open'));
+  FL.appendChild(d);
+});
+document.getElementById('caps').innerHTML=caps.map(c=>
+  `<div class="cp"><h4>${c.h}</h4><div class="amt">${c.a}</div><p>${c.p}</p><div class="j">${c.j}</div></div>`).join('');
+
+const P=document.getElementById('provs'),pmax=Math.max(...provs.map(p=>p.r));
+provs.forEach((p,i)=>{
+  const r=document.createElement('div');r.className='pr';
+  r.innerHTML=`<div class="pn">${p.n}</div><div class="pt"><div class="pb"></div></div><div class="pv">${p.r}%</div><div class="pe">${p.e}</div>`;
+  P.appendChild(r);
+  const b=r.querySelector('.pb');
+  requestAnimationFrame(()=>setTimeout(()=>b.style.width=(p.r/pmax*100)+'%',260+i*26));
+});
+
+/* ── animate bars on scroll ─────────────── */
+const bo=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.style.width=Math.min(parseFloat(e.target.dataset.w),100)+'%';bo.unobserve(e.target)}
+}),{threshold:.15});
+document.querySelectorAll('[data-w]').forEach(el=>bo.observe(el));
+
+/* ── scrollspy ──────────────────────────── */
+const links=[...document.querySelectorAll('#nav a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+const spy=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){const i=secs.indexOf(e.target);
+    if(i>-1){links.forEach(l=>l.classList.remove('on'));links[i].classList.add('on')}}
+}),{rootMargin:'-8% 0px -78% 0px'});
+secs.forEach(s=>s&&spy.observe(s));
+
+draw();sel(sectors[0].n);tog();
+</script>
+</body>
+</html>
